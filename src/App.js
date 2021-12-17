@@ -62,13 +62,13 @@ class App extends Component {
     ],
 
     postData: {
-      lp_campaign_id: '60ec8f7a44bdb',
-      lp_campaign_key: 'ZLdtcNvV7nMghTG2PHpy',
+      lp_campaign_id: "60184895300f1",
+      lp_campaign_key: "HLrBJGjTQP7NC3fmv6k4",
       TCPA_Consent: 'Yes',
       TCPA_Language: 'By hitting Get My Free Quote above, I provide my express written consent to the following. Telemarketing calls, text messages, emails, and postal mail from this Web site, our marketing and re-marketing network, and up to eight insurance companies or their affiliates or representatives at the phone number (including wireless number), email address, and postal address provided by me. Telemarketing calls, text messages, emails, and postal mail (including wireless number), email address, and postal address provided by me. Calls and text messages transmitting insurance quotes, or seeking related additional information from me, using an Automated Telephone Dialing System or prerecorded or artificial voices. Electronic video monitoring and recordation of my activities on this Site. I also understand that my agreement to be contacted is not a condition of purchasing any property, goods, or services and that I may call (855) 701-3066 to speak with someone about obtaining an insurance quote. I acknowledge that I may revoke my consent by emailing “STOP” to optout@quotehound.com. I affirm that I have read and agree to this websites Privacy Policy and Terms of Use',
       trusted_form_cert_id: '',
       jornaya_lead_id: '',
-      landing_page: 'auto.quotehound.com',
+      landing_page: 'auto.quantumassurancee.com',
       useragent: navigator.userAgent,
       entrance_url: '',
 
