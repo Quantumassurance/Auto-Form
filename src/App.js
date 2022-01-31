@@ -70,7 +70,7 @@ class App extends Component {
       jornaya_lead_id: '',
       landing_page: 'auto.quantumassurancee.com',
       user_agent: navigator.userAgent,
-      entrance_url: '',
+      entrance_url: document.referrer,
 
       zip_code: '',
       vehicle_year: '',
@@ -156,10 +156,13 @@ class App extends Component {
                       jornaya_lead_id: document.getElementById('leadid_token').value,
                       trusted_form_cert_id: document.getElementById('xxTrustedFormToken_0').value,
                       zip_code: v,
+                      city: localStorage.getItem('city'),
+                      state: localStorage.getItem('state')
                     },
                   });
                 }}
 
+                
               />
             </Route>
 

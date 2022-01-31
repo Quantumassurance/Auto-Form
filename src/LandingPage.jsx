@@ -3,6 +3,9 @@ import { withRouter } from 'react-router';
 
 import './LandingPage.css';
 
+import $ from 'jquery'; 
+import { ziptastic } from 'jquery';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -20,53 +23,114 @@ import Form from './Assets/Form.svg';
 class LandingPage extends Component {
 
  
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
+    
+        this.state = {zip_code: ''};
+    
+        this.nextStep = this.nextStep.bind(this);
+        this.nextStep = this.nextStep.bind(this);
+      }
 
-    this.state = {zip_code: ''};
+      validateZip = (values) => {
 
-    this.nextStep = this.nextStep.bind(this);
-    this.nextStep = this.nextStep.bind(this);
-  }
-
-
-
-  nextStep (values) {
-        
-    let zipValue = document.getElementById('zipCode').value;
-
-    if(zipValue.length < 5){
-        toast.error("😬 Please enter a valid zip code!");  
-        
         values.preventDefault();
-    }
-    else{
-
-      values.preventDefault();
-
-      toast.dismiss();
-
-      console.log("success: ", zipValue);
-
-      this.setState({zip_code: zipValue})
-
-      this.props.setZipCode(zipValue);
-
-      console.log("updated props with value: ", zipValue);
-
-      this.props.history.push('/car-year' +  '?zip_code=' +  zipValue);
-    }
+    
+        let val = document.getElementById('zip').value;
+        
+        if(val.length < 5){
+          console.log('wrong length');
+          return 
+        }
       
-  }
+    
+        else {
+    
+          var ziptastic = require('ziptastic');
+    
+          let zipVal = document.getElementById('zip').value;
+    
+    
+          var requestOptions = {
+            async: true,
+            crossDomain: true,
+            method: 'GET',
+            redirect: 'follow',
+            url:'https://ziptasticapi.com/' + zipVal
+          };
+    
+          $.ajax(requestOptions).done(function(response){
+            console.log(response);
+    
+            var parse = JSON.parse(response);
+    
+    
+            if (parse.error) {
+              toast.error('Please enter a correct zip code');
+              document.getElementById('submit').disabled = true;
+    
+            }
+    
+            else {
+    
+              document.getElementById('submit').disabled = false;
+    
+              localStorage.setItem('zip', val);
+    
+              document.getElementById('zipCode').value = val
+              document.getElementById('zip').value = val;
+        
+              let zipVal = localStorage.getItem('zip');
+    
+              let city = parse.city;
+            let state = parse.state;
+    
+            localStorage.setItem('city', city);
+            localStorage.setItem('state', state);
+    
+            document.getElementById('city').value = city;
+              document.getElementById('state').value = state;
+            }
+    
+            
+          })
+    
+          
+    
+        }
+      }
 
-  autoFocusClick() {
-    document.getElementById('zipCode').focus();
-  }
+  nextStep(values) {
+    let zipValue = localStorage.getItem('zip');
+    document.getElementById('submit').isDisabled = false;
 
-  componentDidMount = () => {
+    values.preventDefault();
+    
+    toast.dismiss();
 
+    console.log('success', zipValue)
 
-  }
+    this.setState({ zip_code: zipValue })
+    
+    const urlSearch = window.location.search;
+    const urlParams = new URLSearchParams(urlSearch)
+
+    const lp = urlParams.get('lp_request_id');
+    const gclid = urlParams.get('gclid');
+
+    this.props.setZipCode(zipValue);
+
+    console.log("updated props with value: ", zipValue);
+
+    this.props.history.push('/car-year' +  '?zip_code=' +  zipValue);
+
+      }
+  
+    
+      autoFocusClick() {
+        document.getElementById('zipCode').focus();
+      }
+
 
     render() {
 
