@@ -100,7 +100,7 @@ class App extends Component {
       credit_score: '',
       current_insurance_provider: '',
       has_insurance: '',
-      dui: '',
+      dui: 'false',
       lp_caller_id: '',
       gclid: '',
       exid: '',
